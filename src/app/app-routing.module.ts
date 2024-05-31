@@ -10,6 +10,18 @@ const routes: Routes = [
   {
     path: 'folder/:id',
     loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
+  },
+  {
+    path: 'asegurado-list',
+    loadChildren: () => import('./clientes/asegurado-list/asegurado-list.module').then( m => m.AseguradoListPageModule)
+  },
+  {
+    path: 'asegurado-new',
+    loadChildren: () => import('./clientes/asegurado-edit/asegurado-edit.module').then( m => m.AseguradoEditPageModule)
+  },
+  {
+    path: 'asegurado-edit/:id',
+    loadChildren: () => import('./clientes/asegurado-edit/asegurado-edit.module').then( m => m.AseguradoEditPageModule)
   }
 ];
 

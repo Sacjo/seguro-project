@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar class="custom-toolbar" *ngIf="!isSearch">
+    <ion-title>Lista de clientes</ion-title>
+
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" text=""></ion-back-button>
+      <ion-button (click)="clickSearch()">
+        <ion-icon slot="end" name="search"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-toolbar *ngIf="isSearch">
+    <ion-searchbar
+      show-cancel-button="always"
+      show-clear-button="always"
+      (ionClear)="clearSearch()"
+      (ionChange)="buscarSearch($event)"
+    ></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="2" class="ion-text-center"><b>Nombre</b></ion-col>
+      <ion-col size="3" class="ion-text-center"><b>Fecha Nac</b></ion-col>
+      <ion-col size="3" class="ion-text-center"><b>Asegurado</b></ion-col>
+      <ion-col size="2" class="ion-text-center"><b>Monto</b></ion-col>
+      <ion-col size="2" class="ion-text-center"><b>Opcion</b></ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-list>
+    <ion-item *ngFor="let cliente of listaClientes">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="2" class="ion-text-center ion-align-self-center"
+            >{{ cliente.nombre }}</ion-col
+          >
+
+          <ion-col size="3" class="ion-text-center ion-align-self-center"
+            >{{ cliente.fecha }}</ion-col
+          >
+          <ion-col size="3" class="ion-text-center ion-align-self-center"
+            >{{ cliente.bienAsegurado }}</ion-col
+          >
+          <ion-col size="2" class="ion-text-center ion-align-self-center"
+            >{{ cliente.monto }}</ion-col
+          >
+
+          <ion-col size="2" class="custom-button-container">
+            <ion-button [routerLink]="['/asegurado-edit', cliente.id]"
+              ><ion-icon name="create"></ion-icon
+            ></ion-button>
+            <ion-button (click)="eliminarCliente(cliente.id)">
+              <ion-icon name="trash"></ion-icon
+            ></ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button [routerLink]="'/asegurado-new'">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
