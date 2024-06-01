@@ -23,7 +23,7 @@ export class AseguradoListPage implements OnInit {
   ) {}
 
   listaClientes = new Array();
-  maxResults = 15;
+  maxResults = 8;
   ultimoClienteRecuperado: any = null;
   isSearch: boolean = false;
   query = '';
